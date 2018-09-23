@@ -52,3 +52,5 @@ project/plugins/project/
 .cache
 .lib/
 
+### Project Specific
+/version.sbt
