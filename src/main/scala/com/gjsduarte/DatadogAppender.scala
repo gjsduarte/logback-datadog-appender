@@ -18,7 +18,7 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
   // TODO: Load configuration value from environment variables
   @BeanProperty var apiKey: String = _
   @BeanProperty var aws = false
-  @BeanProperty var block = 5000
+  @BeanProperty var block = 5
   @BeanProperty var service: String = _
   @BeanProperty var source = "logback"
   @BeanProperty var sourceCategory = "sourcecode"

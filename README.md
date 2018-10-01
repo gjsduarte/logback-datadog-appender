@@ -28,7 +28,7 @@ This appender uses the [SocketAppender](https://github.com/qos-ch/logback/blob/m
 | ------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | **apiKey**         | *None*                               | Your Datadog api key, which can be found under ["integrations"](https://app.datadoghq.com/account/settings#api) in your account |
 | **aws**            | *false*                              |                                                                                                                                 |
-| **block**          | *5000*                               |                                                                                                                                 |
+| **block**          | *5*                                  | Timeout to block the shutdown waiting for logs to be sent                                                                       |
 | **port**           | *10514*                              |                                                                                                                                 |
 | **remoteHost**     | *intake.logs.datadoghq.com*          |                                                                                                                                 |
 | **service**        | *None*                               |                                                                                                                                 |
