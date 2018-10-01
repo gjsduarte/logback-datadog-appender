@@ -92,6 +92,13 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
     case _ => String.valueOf(char)
   }
 
+  private def message(event: ILoggingEvent) = {
+    Option(event.getFormattedMessage) match {
+      case Some(message) if message.nonEmpty => message
+      case _ => Option(event.getThrowableProxy).map(_.getMessage).getOrElse("")
+    }
+  }
+
   private def serialize(event: ILoggingEvent) = {
     s"""{
        |  "host": "${escape(host)}",
@@ -102,8 +109,8 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
        |  "logger.thread_name": "${escape(event.getThreadName)}",
        |  "level": "${event.getLevel.levelStr}",
        |  "timestamp": ${event.getTimeStamp},
-       |  "message": "${escape(event.getFormattedMessage)}"
+       |  "message": "${escape(message(event))}"
        |  ${error(event)}
-       }}""".stripMargin
+       }""".stripMargin
   }
 }
