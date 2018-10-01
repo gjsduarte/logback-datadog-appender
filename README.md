@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/gjsduarte/logback-datadog-appender.svg?style=svg)](https://circleci.com/gh/gjsduarte/logback-datadog-appender)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/aeaa427beba846c79c582c2a51765f15)](https://app.codacy.com/app/gjsduarte/logback-datadog-appender?utm_source=github.com&utm_medium=referral&utm_content=gjsduarte/logback-datadog-appender&utm_campaign=Badge_Grade_Dashboard)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.gjsduarte/logback-datadog-appender_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.gjsduarte/logback-datadog-appender_2.11)
 
 This appender sends logs to your [Datadog](https://www.datadoghq.com/) account, in bulks using non-blocking threading. Please note that this appender requires logback version 1.2.3 and up, and java 8 and up.
 
