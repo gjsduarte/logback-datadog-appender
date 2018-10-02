@@ -18,6 +18,7 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
   // TODO: Load configuration value from environment variables
   @BeanProperty var apiKey: String = _
   @BeanProperty var aws = false
+  @BeanProperty var environment: String = _
   @BeanProperty var block = 5
   @BeanProperty var service: String = _
   @BeanProperty var source = "logback"
@@ -64,7 +65,6 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
 
   override def transform(event: ILoggingEvent): Serializable = {
     s"""
-       |$apiKey ${serialize(event).replace("\n", "")}
        |${resolveValue(apiKey)} ${serialize(event).replace("\n", "")}
        |""".stripMargin
   }
@@ -120,6 +120,7 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
        |  "service": "${escape(resolveValue(service))}",
        |  "source": "${escape(resolveValue(source))}",
        |  "sourcecategory": "${escape(resolveValue(sourceCategory))}",
+       |  "env": "${escape(resolveValue(environment))}"
        |  "logger.name": "${escape(event.getLoggerName)}",
        |  "logger.thread_name": "${escape(event.getThreadName)}",
        |  "level": "${event.getLevel.levelStr}",
