@@ -65,6 +65,7 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
   override def transform(event: ILoggingEvent): Serializable = {
     s"""
        |$apiKey ${serialize(event).replace("\n", "")}
+       |${resolveValue(apiKey)} ${serialize(event).replace("\n", "")}
        |""".stripMargin
   }
 
@@ -99,12 +100,26 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
     }
   }
 
+  private def resolveValue(value: String): String = {
+    if (value != null && value.startsWith("$")) {
+      val name = value.replace("$", "")
+      val variable = System.getenv(name)
+      if (variable == null || variable.isEmpty) {
+        System.getProperty(name)
+      } else {
+        variable
+      }
+    } else {
+      value
+    }
+  }
+
   private def serialize(event: ILoggingEvent) = {
     s"""{
-       |  "host": "${escape(host)}",
-       |  "service": "${escape(service)}",
-       |  "source": "${escape(source)}",
-       |  "sourcecategory": "${escape(sourceCategory)}",
+       |  "host": "${escape(resolveValue(host))}",
+       |  "service": "${escape(resolveValue(service))}",
+       |  "source": "${escape(resolveValue(source))}",
+       |  "sourcecategory": "${escape(resolveValue(sourceCategory))}",
        |  "logger.name": "${escape(event.getLoggerName)}",
        |  "logger.thread_name": "${escape(event.getThreadName)}",
        |  "level": "${event.getLevel.levelStr}",
