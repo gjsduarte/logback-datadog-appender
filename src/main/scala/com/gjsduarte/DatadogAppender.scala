@@ -120,7 +120,7 @@ class DatadogAppender extends SocketAppender with PreSerializationTransformer[IL
        |  "service": "${escape(resolveValue(service))}",
        |  "source": "${escape(resolveValue(source))}",
        |  "sourcecategory": "${escape(resolveValue(sourceCategory))}",
-       |  "env": "${escape(resolveValue(environment))}"
+       |  "env": "${escape(resolveValue(environment))}",
        |  "logger.name": "${escape(event.getLoggerName)}",
        |  "logger.thread_name": "${escape(event.getThreadName)}",
        |  "level": "${event.getLevel.levelStr}",
